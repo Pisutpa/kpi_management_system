@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const { createUser, findUserByUsername } = require('../models/userModel')
 const pool = require('../models/db')
+const userModel = require('../models/userModel')
 
 exports.register = async (req, res) => {
   const { username, email, password } = req.body
@@ -30,13 +31,13 @@ exports.login = async (req, res) => {
   try {
     const user = await findUserByUsername(username)
     console.log(user)
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' })
+    if (!user) return res.status(400).json({ message: 'Invalid Username' })
 
     const isMatch = await bcrypt.compare(password, user.password_hash)
-    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' })
+    if (!isMatch) return res.status(400).json({ message: 'Invalid Password' })
       const payload = {
         id:user.id,
-        user:user.username,
+        username:user.username,
         role:user.role_id
        }
       const token = jwt.sign(payload, process.env.JWT_SECRET,
@@ -50,3 +51,19 @@ exports.login = async (req, res) => {
   }
 }
 
+
+
+
+exports.currentUser = async (req, res) => {
+  try {
+    const user = await userModel.findUserById(req.user.id)
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+
+    res.json(user)
+  } catch (err) {
+    res.status(500).json({ error: err.message })
+  }
+}

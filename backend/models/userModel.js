@@ -13,6 +13,10 @@ exports.findUserByUsername = async (username) => {
   const res = await pool.query('SELECT * FROM users WHERE username = $1', [username])
   return res.rows[0]
 }
+exports.findUserById = async (userId) => {
+  const res = await pool.query('SELECT id, username, email, role_id FROM users WHERE id = $1', [userId])
+  return res.rows[0]
+}
 
 
 exports.getAllUsers = async () => {
