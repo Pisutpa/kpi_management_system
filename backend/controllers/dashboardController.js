@@ -36,45 +36,4 @@ exports.getKpiOverview = async (req, res) => {
 
 
 
-  exports.getFilteredKpis = async (req, res) => {
-    const { userId, status, category } = req.query
-  
-
-    let query = 'SELECT * FROM kpis WHERE 1=1'  
-  
-   
-    if (userId) {
-      query += ' AND assigned_user = $1'
-      params.push(userId)
-    }
-  
-
-    if (status) {
-      query += ' AND status = $2'
-      params.push(status)
-    }
-  
-  
-    if (category) {
-      query += ' AND category = $3'  
-      params.push(category)
-    }
-  
-    try {
-     
-      const result = await pool.query(query, params)
-    } catch (err) {
-      res.status(500).json({ message: 'Error fetching filtered KPIs', error: err.message })
-    }
-  }
-  
-
-  exports.getKpiAnalyticsHandler = async (req, res) => {
-    try {
-      const analytics = await kpiModel.getKpiAnalytics()
-      res.json(analytics)
-    } catch (err) {
-      res.status(500).json({ message: err.message })
-    }
-  }
   

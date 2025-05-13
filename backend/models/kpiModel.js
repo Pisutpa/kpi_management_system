@@ -72,40 +72,58 @@ exports.getKpisByUser = async (userId) => {
     throw new Error('Error fetching KPIs from database')
   }
 }
-exports.findKpiById = async (kpiId) => {
+exports.findKpiByIdAndUserId = async (kpiId, userId) => {
+
   try {
     if (!kpiId || isNaN(kpiId)) {
-      throw new Error('Invalid KPI ID');
+      throw new Error('Invalid KPI ID')
     }
 
-    const res = await pool.query('SELECT * FROM kpis WHERE id = $1', [kpiId]);
+    const res = await pool.query('SELECT * FROM kpis WHERE id = $1 and assigned_user = $2 ', [kpiId, userId])
 
     if (res.rows.length === 0) {
-      throw new Error('KPI not found');
+      throw new Error('KPI not found')
     }
 
-    return res.rows[0];
+    return res.rows[0]
   } catch (err) {
-    console.error('Error fetching KPI:', err.message);
-    throw new Error('Error fetching KPI: ' + err.message);
+    console.error('Error fetching KPI:', err.message)
+    throw new Error('Error fetching KPI: ' + err.message)
   }
-};
+}
+
+exports.deleteKPI = async (id) => {
+  try {
+    const result = await pool.query('DELETE FROM kpis WHERE id = $1', [id])
+
+    if (result.rowCount > 0) {
+      return true
+    } else {
+      return false
+    }
+  } catch (error) {
+    console.error('Error deleting KPI:', error)
+    throw new Error('Database error during KPI deletion')
+  }
+}
+
+
 
 
 exports.updateKpiProgress = async (kpiId, updatedValue) => {
   await pool.query(
     'UPDATE kpis SET actual_value = $1, updated_at = NOW() WHERE id = $2',
     [updatedValue, kpiId]
-  );
-};
+  )
+}
 
 exports.addKpiUpdateLog = async (kpiId, updatedValue, comment, userId) => {
   await pool.query(
     `INSERT INTO kpi_updates (kpi_id, updated_value, comment, updated_by) 
      VALUES ($1, $2, $3, $4)`,
     [kpiId, updatedValue, comment, userId]
-  );
-};
+  )
+}
 
 exports.getKpiAnalytics = async () => {
   try {
@@ -132,4 +150,13 @@ exports.getKpiAnalytics = async () => {
   } catch (err) {
     throw new Error('Error fetching KPI analytics: ' + err.message)
   }
+}
+
+exports.getAllKPIsAndUser = async () => {
+  const res = await pool.query(`
+    SELECT kpis.*, users.*
+    FROM kpis
+    JOIN users ON kpis.assigned_user = users.id
+  `)
+  return res.rows
 }

@@ -11,9 +11,13 @@ import ManageUser from '../pages/admin/ManageUser';
 import LayoutUser from '../Layouts/LayoutUser';
 
 import Homeuser from '../pages/user/Homeuser';
-import Home from '../pages/home';
+
 import ProtectRouteUser from './ProtectRouteUser';
 import ProtectRouteAdmin from './ProtectRouteAdmin';
+import EditManageUser from '../pages/admin/EditManageUser';
+import EditKpi from '../pages/admin/EditKpi';
+import Home from '../pages/Home';
+
 
 
 const router = createBrowserRouter([
@@ -24,6 +28,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
+     
     ]
   },
 
@@ -35,20 +40,21 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Dashboard /> },
       { path: 'kpi', element: <Kpi/> },
+      { path: 'kpi/:id', element: <EditKpi/> },
       { path: 'manage', element: <ManageUser/> },
+      { path: 'manage/:id', element: <EditManageUser/> },
     ]
   },
   
 
-  {
-    path: '/user',
-    // element: <LayoutUser />,
-    element: <ProtectRouteUser element={<LayoutUser />} />,
-    children: [
-      { index: true, element: <Homeuser /> },
-    
-    ]
-  },
+{
+  path: '/user',
+  element: <ProtectRouteUser element={<LayoutUser />} />,
+  children: [
+    { path: 'my-users', element: <Homeuser /> }  
+  ]
+}
+
 
 ])
 

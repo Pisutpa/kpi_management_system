@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'
 const Register = () => {
+  const navigate = useNavigate()
   const [form, setForm] = useState({
 
 
@@ -22,13 +24,16 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-
+ if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match")
+      return
+    }
     console.log(form);
     try {
       const res = await axios.post('http://localhost:5000/api/register', form)
       console.log(res.data)
       toast.success('Registration successful!')
-
+      navigate('/')
     } catch (error) {
       const errMsg = error.response?.data?.message
       toast.error(errMsg);
@@ -73,6 +78,18 @@ const Register = () => {
             type="password"
             name="password"
             value={form.password}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block text-sm font-semibold mb-2">confirmPassword</label>
+          <input
+          
+            type="password"
+            name="confirmPassword"
+           
             onChange={handleChange}
             className="w-full p-2 border rounded"
             required

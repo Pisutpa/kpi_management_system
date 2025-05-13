@@ -20,12 +20,16 @@ exports.findUserById = async (userId) => {
 
 
 exports.getAllUsers = async () => {
-  const res = await pool.query('SELECT id, username, email, role_id FROM users');
-  return res.rows;
-};
+  const res = await pool.query('SELECT id, username, email, role_id FROM users')
+  return res.rows
+}
 
+exports.getUserById = async (id) => {
+  const result = await pool.query('SELECT * FROM users WHERE id = $1', [id])
+return result.rows[0]  
+}
 exports.updateUser = async (userId, data) => {
-  const { username, email, passwordHash, role_id } = data;
+  const { username, email, passwordHash, role_id } = data
 
   const res = await pool.query(
     `UPDATE users SET 
@@ -36,11 +40,11 @@ exports.updateUser = async (userId, data) => {
       updated_at=NOW()
      WHERE id=$5 RETURNING id, username, email, role_id`,
     [username, email, passwordHash, role_id, userId]
-  );
-  return res.rows[0];
-};
+  )
+  return res.rows[0]
+}
 
 exports.deleteUser = async (userId) => {
-  await pool.query('DELETE FROM users WHERE id = $1', [userId]);
-};
+  await pool.query('DELETE FROM users WHERE id = $1', [userId])
+}
 

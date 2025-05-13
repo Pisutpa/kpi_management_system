@@ -11,8 +11,8 @@ exports.authMiddleware = async (req, res, next) => {
         const jwtToken = token.split(" ")[1]
         const decoded = jwt.verify(jwtToken, process.env.JWT_SECRET)
 
-        console.log('Decoded JWT:', decoded)  // เช็คว่าได้อะไร
-        req.user = decoded  // ไม่ต้อง .user แล้ว
+        console.log('Decoded JWT:', decoded)  
+       req.user = decoded  
 
         next()  
     } catch (err) {

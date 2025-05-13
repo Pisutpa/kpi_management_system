@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { toast } from 'react-toastify';
 import useKpiStore from '../../store/kpi-store';
 import { useNavigate } from 'react-router-dom';
@@ -7,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const navigate = useNavigate();
   const actionLogin = useKpiStore((state) => state.actionLogin);
-  const user = useKpiStore((state) => state.user);
-  console.log(user);
 
   const [form, setForm] = useState({
     username: '',
@@ -22,37 +19,34 @@ const Login = () => {
     });
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const res = await actionLogin(form);
-      console.log(res.data);
-
-      const role = res.data.payload.role;
-      console.log(role);
+      const payload = res.data.payload;   // << เก็บ payload มาใช้
 
       toast.success('Login successful!');
 
-      roleRedirect(role);
+      // ส่ง role และ userId ให้ roleRedirect
+      roleRedirect(payload.role, payload.id);
 
     } catch (error) {
-      const errMsg = error.response?.data.message;
+      const errMsg = error.response?.data.message || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ';
       toast.error(errMsg);
     }
   };
- 
-  const roleRedirect = (role) => {
+
+  const roleRedirect = (role, id) => {
     const numericRole = parseInt(role);
     if (numericRole === 1) {
       navigate('/admin');
-    } else {
-      navigate('/user');
+    } else if(numericRole === 2){
+      console.log(`Navigating to: /user/my-users/${id}`);
+       navigate(`/user/my-users/`);
     }
   };
-  
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form onSubmit={handleSubmit} className="bg-white p-8 rounded shadow-md w-96">
@@ -70,7 +64,6 @@ const Login = () => {
           />
         </div>
 
-      
         <div className="mb-6">
           <label className="block text-sm font-semibold mb-2">Password</label>
           <input

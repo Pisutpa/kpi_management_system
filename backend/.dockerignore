@@ -1,0 +1,32 @@
+# Node modules (should be installed inside the container)
+node_modules
+
+# Dependency lock files (optional if you want a clean install)
+npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Environment files (optional, unless you want to copy them manually)
+.env
+.env.*
+
+# OS/Editor/System junk files
+.DS_Store
+Thumbs.db
+
+# Git and version control
+.git
+.gitignore
+
+# Docker files (to avoid copying Docker definitions themselves, optional)
+Dockerfile
+.dockerignore
+
+# Logs
+logs
+*.log
+
+# IDE/editor folders
+.vscode
+.idea
+*.swp

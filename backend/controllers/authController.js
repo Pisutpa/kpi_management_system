@@ -13,11 +13,8 @@ exports.register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
-
     const roleRes = await pool.query("SELECT id FROM roles WHERE name='user'")
     const roleId = roleRes.rows[0].id
-
-
 
     const user = await createUser(username, email, hashedPassword, roleId)
     res.status(201).json({ message: 'User registered', user: { id: user.id, username: user.username } })
@@ -47,6 +44,7 @@ exports.login = async (req, res) => {
     res.json({ payload,token })
 
   } catch (err) {
+    console.error('Error logging in user:', err)
     res.status(500).json({ error: err.message })
   }
 }

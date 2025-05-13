@@ -1,8 +1,12 @@
 
 import React from 'react'
+import FormManageUser from '../../components/admin/FormManageUser'
 const ManageUser = () => {
   return (
-    <div>ManageUser</div>
+    <div>
+<FormManageUser/>
+
+    </div>
   )
 }
 export default ManageUser

@@ -19,7 +19,7 @@ exports.getKpis = async (req, res) => {
       const kpis = await kpiModel.getAllKPIs()
       console.log(kpis)
       
-      res.json(kpis)  // ส่งข้อมูลกลับไป
+      res.json(kpis)
     } catch (error) {
       res.status(500).json({ message: error.message })
     }
@@ -57,7 +57,6 @@ exports.updateKpi = async (req, res) => {
     }
   }
 
-// ลบ KPI
 exports.removeKpi = async (req, res) => {
     const { id } = req.params
     try {
@@ -71,7 +70,7 @@ exports.removeKpi = async (req, res) => {
       res.status(500).json({ message: error.message })
     }
   }
-//-----------------
+
 
 exports.getMyKpis = async (req, res) => {
   const userId = req.params.id
@@ -95,25 +94,17 @@ exports.updateMyKpiProgress = async (req, res) => {
   const { kpiId } = req.params
   const { updatedValue, comment } = req.body
 
-  // ตรวจสอบว่า updatedValue ถูกส่งมาหรือไม่
   if (updatedValue === undefined || updatedValue === null) {
     return res.status(400).json({ message: 'updatedValue is required' })
   }
 
-  console.log('User ID:', userId)
-  console.log('KPI ID:', kpiId)
-  console.log('Updated Value:', updatedValue) // ตรวจสอบค่า updatedValue ที่ส่งมา
+
 
   try {
-    const kpi = await kpiModel.findKpiById(kpiId)
+    const kpi = await kpiModel.findKpiByIdAndUserId(kpiId, userId)
     if (!kpi) {
       return res.status(404).json({ message: 'KPI not found' })
     }
-
-    if (kpi.assigned_user !== userId) {
-      return res.status(403).json({ message: 'Unauthorized' })
-    }
-
     await kpiModel.updateKpiProgress(kpiId, updatedValue)
     await kpiModel.addKpiUpdateLog(kpiId, updatedValue, comment, userId)
 
@@ -124,3 +115,10 @@ exports.updateMyKpiProgress = async (req, res) => {
   }
 }
 
+
+
+
+
+exports.getAllKpis = async () => {
+  return await kpiModel.getAllKPIs()
+};
