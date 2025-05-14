@@ -20,7 +20,6 @@ exports.authMiddleware = async (req, res, next) => {
     }
 }
 
-
 exports.roleMiddleware = (roles) => {
     return (req, res, next) => {
       console.log(req.user);

@@ -25,9 +25,6 @@ exports.createUser = async (req, res) => {
   const { username, email, password, role_id } = req.body
   try {
     const hashedPassword = await bcrypt.hash(password, 10)
-
-    
-
     const newUser = await userModel.createUser(username, email, hashedPassword, role_id)
     res.status(201).json(newUser)
   } catch (err) {

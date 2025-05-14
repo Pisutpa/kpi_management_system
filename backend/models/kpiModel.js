@@ -23,7 +23,6 @@ exports.createKPI = async (data) => {
   return res.rows[0]
 }
 
-
 exports.getAllKPIs = async () => {
   const res = await pool.query('SELECT * FROM kpis')
   return res.rows
@@ -106,9 +105,6 @@ exports.deleteKPI = async (id) => {
     throw new Error('Database error during KPI deletion')
   }
 }
-
-
-
 
 exports.updateKpiProgress = async (kpiId, updatedValue) => {
   await pool.query(

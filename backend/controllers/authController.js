@@ -49,9 +49,6 @@ exports.login = async (req, res) => {
   }
 }
 
-
-
-
 exports.currentUser = async (req, res) => {
   try {
     const user = await userModel.findUserById(req.user.id)

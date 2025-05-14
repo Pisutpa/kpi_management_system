@@ -4,7 +4,6 @@ const { getAllUsers, createUser, deleteUser, updateUser, getUsersById } = requir
 const { getMyKpis, updateMyKpiProgress } = require('../controllers/kpiController');
 const router = express.Router()
 
-
 router.post('/user', authMiddleware,roleMiddleware(['admin']), createUser)
 router.get('/users', authMiddleware,roleMiddleware(['admin']),getAllUsers)
 router.get('/user/:id', authMiddleware,roleMiddleware(['admin']),getUsersById)

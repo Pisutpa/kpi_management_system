@@ -1,7 +1,5 @@
 
 const kpiModel = require('../models/kpiModel')
-
-
 exports.createKpi = async (req, res) => {
   const { title, description, target_value, actual_value, status, assigned_user, start_date, end_date } = req.body
   try {
@@ -11,7 +9,6 @@ exports.createKpi = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 }
-
 
 exports.getKpis = async (req, res) => {
     try {
@@ -71,7 +68,6 @@ exports.removeKpi = async (req, res) => {
     }
   }
 
-
 exports.getMyKpis = async (req, res) => {
   const userId = req.params.id
   
@@ -98,8 +94,6 @@ exports.updateMyKpiProgress = async (req, res) => {
     return res.status(400).json({ message: 'updatedValue is required' })
   }
 
-
-
   try {
     const kpi = await kpiModel.findKpiByIdAndUserId(kpiId, userId)
     if (!kpi) {
@@ -114,10 +108,6 @@ exports.updateMyKpiProgress = async (req, res) => {
     res.status(500).json({ message: 'Error updating KPI', error: err.message })
   }
 }
-
-
-
-
 
 exports.getAllKpis = async () => {
   return await kpiModel.getAllKPIs()
