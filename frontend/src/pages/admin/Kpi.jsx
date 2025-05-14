@@ -3,7 +3,7 @@ import FormKpi from '../../components/admin/FormKpi'
 const Kpi = () => {
   return (
     <div>
-      <FormKpi/>
+      <FormKpi />
     </div>
   )
 }

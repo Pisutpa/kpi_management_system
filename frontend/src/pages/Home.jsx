@@ -1,20 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { listOverView } from '../api/daschBoardHome'
 import { Line } from 'react-chartjs-2';
-
 import { Pie } from 'react-chartjs-2';
-
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement, Filler } from 'chart.js';
-
 ChartJS.register(ArcElement, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement, Filler);
-
 
 const Home = () => {
   const [filteredKpis, setFilteredKpis] = useState([])
   const [filteredKpisTotal, setFilteredKpisTotal] = useState([])
   const [filteredAchievedKPIs, setFilteredAchievedKPIs] = useState([])
   const [FilteredRateKPIs, setFilteredRateKPIs] = useState([])
-
 
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(5)
@@ -33,7 +28,6 @@ const Home = () => {
   const fetchData = async () => {
     try {
       const res = await listOverView()
-
       setFilteredKpis(res.data.kpis)
       setFilteredKpisTotal(res.data.totalKpis)
       setFilteredAchievedKPIs(res.data.achievedKpis)
@@ -49,27 +43,19 @@ const Home = () => {
 
       const isAchieved = kpi.actual_value >= kpi.target_value;
       if (!isAchieved) return
-
-
       const month = new Date(kpi.start_date).toISOString().slice(0, 7); // YYYY-MM
-
       if (monthMap[month]) {
         monthMap[month] += 1;
       } else {
         monthMap[month] = 1;
       }
     });
-
     return monthMap;
   };
-
   const trendData = Object.entries(getMonthlyKpiAchievementTrends()).map(([month, count]) => ({
     month,
     achievedKpis: count
   }));
-
-
-
   const trendChartData = {
     labels: trendData.map(item => item.month),
     datasets: [
@@ -95,7 +81,6 @@ const Home = () => {
     ],
   };
 
-
   const renderStatusDot = (status) => {
     let colorClass = '';
 
@@ -120,13 +105,7 @@ const Home = () => {
       </span>
     );
   };
-
-
-
   return (
-
-
-
     <div className="bg-white text-gray-800 font-sans min-h-screen">
       <section className="py-8 px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
         {[
@@ -140,7 +119,6 @@ const Home = () => {
           </div>
         ))}
       </section>
-
       <section className="px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="bg-white rounded-2xl shadow-md p-4 h-80 hover:shadow-lg transition duration-200">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">KPI Achievement Trend</h3>
@@ -152,7 +130,6 @@ const Home = () => {
             }} />
           </div>
         </div>
-
         <div className="bg-white rounded-2xl shadow-md p-4 h-80 hover:shadow-lg transition duration-200">
           <h3 className="text-lg font-semibold text-gray-700 mb-2">KPI Category Breakdown</h3>
           <div className='w-full h-[240px]'>
@@ -160,7 +137,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="px-6 py-8">
         <h2 className="text-2xl font-bold mb-4">Detailed KPI List</h2>
         <div className="mt-6 overflow-x-auto rounded-xl shadow-md">
@@ -184,7 +160,6 @@ const Home = () => {
               ))}
             </tbody>
           </table>
-
           <div className="flex flex-col md:flex-row items-center justify-between mt-4 gap-3 px-2 pb-2">
             <div>
               <label className="mr-2 font-medium">แสดงแถว:</label>
@@ -205,20 +180,10 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <footer className="py-6 text-center text-sm text-gray-500">
         Prepared by Analytics Team | Date: 10 May 2025
       </footer>
-
     </div>
-
-
-
-
-
-
-
-
   );
 };
 

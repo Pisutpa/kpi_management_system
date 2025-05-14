@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import useKpiStore from "../store/kpi-store";
 import { currentUser } from "../api/authApi";
-import { Navigate } from "react-router-dom";
 import LoadingToRedirect from "./LoadingToRedirect";
 
 const ProtectRouteUser = ({ element }) => {
@@ -20,13 +19,9 @@ const ProtectRouteUser = ({ element }) => {
           console.log(err);
           setOK(false)
         });
-    } 
+    }
   }, [])
-
-  
-
- 
-  return ok ? element :<LoadingToRedirect />
+  return ok ? element : <LoadingToRedirect />
 };
 
 export default ProtectRouteUser;

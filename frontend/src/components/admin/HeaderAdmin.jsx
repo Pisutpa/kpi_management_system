@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useKpiStore from "../../store/kpi-store";
 
-
 const HeaderAdmin = () => {
   const navigate = useNavigate();
   const user = useKpiStore((s) => s.user);

@@ -1,5 +1,4 @@
 import React from "react"
-
 import { NavLink } from "react-router-dom"
 import {
   LayoutDashboard,
@@ -12,7 +11,7 @@ import {
 import useKpiStore from "../../store/kpi-store"
 
 const SidebarAdmin = () => {
-   const logout = useKpiStore((s) => s.logout)
+  const logout = useKpiStore((s) => s.logout)
   return (
     <div
       className="bg-gray-800 w-64 text-gray-100 
@@ -61,11 +60,7 @@ const SidebarAdmin = () => {
           <UserCog className="mr-2" />
           Manage User
         </NavLink>
-
-
-
       </nav>
-
     </div>
   )
 }

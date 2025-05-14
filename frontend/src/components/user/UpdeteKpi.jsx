@@ -14,7 +14,6 @@ const UpdateKpiUser = () => {
         updatedValue: '',
         comment: ''
     }
-
     const [form, setForm] = useState(initialForm)
     const [loading, setLoading] = useState(false)
     const [kpiData, setKpiData] = useState(null)
@@ -46,7 +45,6 @@ const UpdateKpiUser = () => {
             toast.error('เกิดข้อผิดพลาดในการดึงข้อมูล KPI')
         }
     }
-
     const handleChange = (e) => {
         const { name, value } = e.target
         setForm((prevForm) => ({
@@ -142,7 +140,6 @@ console.log(form);
                             className="w-full p-2 border rounded"
                         />
                     </div>
-
                     <div>
                         <label className="block text-sm font-semibold mb-1">Comment</label>
                         <textarea
@@ -152,7 +149,6 @@ console.log(form);
                             className="w-full p-2 border rounded"
                         />
                     </div>
-
                     <button
                         type="submit"
                         className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600"

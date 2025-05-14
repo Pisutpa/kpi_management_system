@@ -4,9 +4,6 @@ import { toast } from "react-toastify"
 import useKpiStore from "../../store/kpi-store"
 import { useParams, useNavigate } from "react-router-dom"
 
-
-
-
 const FormEditManageUser = () => {
 
     const { id } = useParams()
@@ -62,8 +59,6 @@ const FormEditManageUser = () => {
             toast.error(errMsg || 'เกิดข้อผิดพลาด')
         }
     }
-
-
 
     return (
         <div className="container mx-auto p-4 bg-white shadow-md">

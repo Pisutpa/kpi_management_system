@@ -5,14 +5,12 @@ import MainNav from '../components/MainNav'
 const LayoutUser = () => {
   return (
     <div>
-
-<h1><MainNav/></h1>
+      <h1><MainNav /></h1>
       <main>
         <hr />
         <br />
- <Outlet/>
+        <Outlet />
       </main>
-       
     </div>
   )
 }

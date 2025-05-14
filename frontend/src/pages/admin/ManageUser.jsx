@@ -4,7 +4,7 @@ import FormManageUser from '../../components/admin/FormManageUser'
 const ManageUser = () => {
   return (
     <div>
-<FormManageUser/>
+      <FormManageUser />
 
     </div>
   )

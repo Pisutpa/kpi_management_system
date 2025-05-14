@@ -1,34 +1,28 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import React, { useState } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 const Register = () => {
   const navigate = useNavigate()
   const [form, setForm] = useState({
-
-
     username: '',
     email: '',
     password: ''
-
-  });
+  })
 
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
-    });
-
-
-  };
+    })
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
- if (form.password !== form.confirmPassword) {
+    if (form.password !== form.confirmPassword) {
       alert("Passwords do not match")
       return
     }
-    console.log(form);
     try {
       const res = await axios.post('http://localhost:5000/api/register', form)
       console.log(res.data)
@@ -36,12 +30,10 @@ const Register = () => {
       navigate('/')
     } catch (error) {
       const errMsg = error.response?.data?.message
-      toast.error(errMsg);
-      console.log(error);
-
+      toast.error(errMsg)
+      console.log(error)
     }
-
-  };
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -59,7 +51,6 @@ const Register = () => {
             required
           />
         </div>
-
         <div className="mb-4">
           <label className="block text-sm font-semibold mb-2">Email</label>
           <input
@@ -71,7 +62,6 @@ const Register = () => {
             required
           />
         </div>
-
         <div className="mb-6">
           <label className="block text-sm font-semibold mb-2">Password</label>
           <input
@@ -86,10 +76,8 @@ const Register = () => {
         <div className="mb-6">
           <label className="block text-sm font-semibold mb-2">confirmPassword</label>
           <input
-          
             type="password"
             name="confirmPassword"
-           
             onChange={handleChange}
             className="w-full p-2 border rounded"
             required
@@ -104,7 +92,7 @@ const Register = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register

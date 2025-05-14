@@ -63,7 +63,6 @@ const FormEditKpi = () => {
             assigned_user: parseInt(form.assigned_user, 10)
         }
 
-
         if (!form.title || !form.assigned_user || !form.status) {
             toast.error('กรุณากรอกข้อมูลให้ครบถ้วน')
             return

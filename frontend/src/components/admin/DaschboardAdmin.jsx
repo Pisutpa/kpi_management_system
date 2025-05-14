@@ -10,7 +10,7 @@ const Dashboard = () => {
     const getKpi = useKpiStore((state) => state.getKpi);
     const token = useKpiStore((state) => state.token);
     const listuser = useKpiStore((state) => state.listuser);
-    
+
     const [filteredKpis, setFilteredKpis] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedUser, setSelectedUser] = useState('');
@@ -104,7 +104,6 @@ const Dashboard = () => {
     };
 
     const monthlyTrends = getMonthlyKpiTrends();
-
 
     const trendChartData = {
         labels: monthlyTrends.labels,

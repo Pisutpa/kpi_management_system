@@ -9,16 +9,12 @@ import Dashboard from '../pages/admin/Dashboard';
 import Kpi from '../pages/admin/Kpi';
 import ManageUser from '../pages/admin/ManageUser';
 import LayoutUser from '../Layouts/LayoutUser';
-
 import Homeuser from '../pages/user/Homeuser';
-
 import ProtectRouteUser from './ProtectRouteUser';
 import ProtectRouteAdmin from './ProtectRouteAdmin';
 import EditManageUser from '../pages/admin/EditManageUser';
 import EditKpi from '../pages/admin/EditKpi';
 import Home from '../pages/Home';
-
-
 
 const router = createBrowserRouter([
   {
@@ -31,7 +27,6 @@ const router = createBrowserRouter([
      
     ]
   },
-
   {
     path: '/admin',
     // element: <LayoutAdmin />,
@@ -45,8 +40,6 @@ const router = createBrowserRouter([
       { path: 'manage/:id', element: <EditManageUser/> },
     ]
   },
-  
-
 {
   path: '/user',
   element: <ProtectRouteUser element={<LayoutUser />} />,
@@ -54,8 +47,6 @@ const router = createBrowserRouter([
     { path: 'my-users', element: <Homeuser /> }  
   ]
 }
-
-
 ])
 
 const AppRoutes = () => {

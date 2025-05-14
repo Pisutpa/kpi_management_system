@@ -4,10 +4,10 @@ import AppRoutes from './routes/AppRoutes'
 import { ToastContainer } from 'react-toastify';
 const App = () => {
   return (
-   <>
-   <AppRoutes />
-   <ToastContainer />
-   </>)
+    <>
+      <AppRoutes />
+      <ToastContainer />
+    </>)
 }
 export default App
 

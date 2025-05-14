@@ -1,51 +1,51 @@
-import React, { useState } from 'react';
-import { toast } from 'react-toastify';
-import useKpiStore from '../../store/kpi-store';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import { toast } from 'react-toastify'
+import useKpiStore from '../../store/kpi-store'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const navigate = useNavigate();
-  const actionLogin = useKpiStore((state) => state.actionLogin);
+  const navigate = useNavigate()
+  const actionLogin = useKpiStore((state) => state.actionLogin)
 
   const [form, setForm] = useState({
     username: '',
     password: ''
-  });
+  })
 
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value,
-    });
-  };
+    })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     try {
-      const res = await actionLogin(form);
-      const payload = res.data.payload;   // << เก็บ payload มาใช้
+      const res = await actionLogin(form)
+      const payload = res.data.payload   
 
-      toast.success('Login successful!');
+      toast.success('Login successful!')
 
       // ส่ง role และ userId ให้ roleRedirect
-      roleRedirect(payload.role, payload.id);
+      roleRedirect(payload.role, payload.id)
 
     } catch (error) {
-      const errMsg = error.response?.data.message || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ';
-      toast.error(errMsg);
+      const errMsg = error.response?.data.message || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ'
+      toast.error(errMsg)
     }
-  };
+  }
 
   const roleRedirect = (role, id) => {
-    const numericRole = parseInt(role);
+    const numericRole = parseInt(role)
     if (numericRole === 1) {
-      navigate('/admin');
-    } else if(numericRole === 2){
-      console.log(`Navigating to: /user/my-users/${id}`);
-       navigate(`/user/my-users/`);
+      navigate('/admin')
+    } else if (numericRole === 2) {
+      console.log(`Navigating to: /user/my-users/${id}`)
+      navigate(`/user/my-users/`)
     }
-  };
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -84,7 +84,6 @@ const Login = () => {
         </button>
       </form>
     </div>
-  );
-};
-
-export default Login;
+  )
+}
+export default Login

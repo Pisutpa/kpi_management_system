@@ -29,8 +29,6 @@ const FormManageKpi = () => {
     const currentKpis = listkpi.slice(indexOfFirstItem, indexOfLastItem)
     const totalPages = Math.ceil(listkpi.length / itemsPerPage)
 
-
-
     const [form, setForm] = useState(initialForm)
     const [loading, setLoading] = useState(false)
     const resetForm = () => {
@@ -49,8 +47,6 @@ const FormManageKpi = () => {
             [e.target.name]: e.target.value,
         })
     }
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -80,8 +76,6 @@ const FormManageKpi = () => {
         } finally {
             setLoading(false)
         }
-
-
     }
     const handleRemove = async (id) => {
         const confirmDelete = window.confirm('ยืนยันการลบข้อมูลนี้ใช่หรือไม่?')
@@ -159,7 +153,6 @@ const FormManageKpi = () => {
         }
     };
 
-
     return (
         <div className="container mx-auto p-4 bg-white shadow-md">
             <h1 className="text-xl font-semibold mb-4">Create KPI</h1>
@@ -176,7 +169,6 @@ const FormManageKpi = () => {
                         required
                     />
                 </div>
-
                 <div>
                     <label className="block text-sm font-semibold mb-1">Description</label>
                     <textarea
@@ -199,7 +191,6 @@ const FormManageKpi = () => {
                             className="w-full p-2 border rounded"
                         />
                     </div>
-
                     <div>
                         <label className="block text-sm font-semibold mb-1">Actual Value</label>
                         <input
@@ -211,7 +202,6 @@ const FormManageKpi = () => {
                         />
                     </div>
                 </div>
-
                 <div>
                     <label className="block text-sm font-semibold mb-1">Status</label>
                     <select
@@ -227,7 +217,6 @@ const FormManageKpi = () => {
                         <option value="Off Track">Off Track</option>
                     </select>
                 </div>
-
                 <div>
                     <label className="block text-sm font-semibold mb-1">Assigned User</label>
                     <select
@@ -245,7 +234,6 @@ const FormManageKpi = () => {
                         ))}
                     </select>
                 </div>
-
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-semibold mb-1">Start Date</label>
@@ -257,7 +245,6 @@ const FormManageKpi = () => {
                             className="w-full p-2 border rounded"
                         />
                     </div>
-
                     <div>
                         <label className="block text-sm font-semibold mb-1">End Date</label>
                         <input
@@ -269,7 +256,6 @@ const FormManageKpi = () => {
                         />
                     </div>
                 </div>
-
                 <button
                     type="submit"
                     disabled={loading}
@@ -287,13 +273,8 @@ const FormManageKpi = () => {
                 <button onClick={exportPDF} className="px-6  text-white  bg-red-500 rounded-lg shadow-lg transition transform hover:scale-105 hover:shadow-xl focus:outline-none">
                     ดาวน์โหลดรายงาน PDF
                 </button>
-              
- 
             </div>
-
-
             <table className="min-w-full table-auto">
-
                 <thead>
                     <tr>
                         <th className="py-2 px-4 border text-center">No.</th>
@@ -332,8 +313,6 @@ const FormManageKpi = () => {
                     )}
                 </tbody>
             </table>
-
-
             <div className="flex items-center justify-between mt-4">
                 <div>
                     <label className="mr-2">แสดงแถว:</label>
@@ -347,7 +326,6 @@ const FormManageKpi = () => {
                         <option value={20}>20</option>
                     </select>
                 </div>
-
                 <div className="flex gap-2 items-center">
                     <button
                         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}

@@ -22,7 +22,7 @@ function MainNav() {
             <div className="mx-auto px-4 max-w-8xl">
                 <div className="flex justify-between items-center h-16">
 
-                    
+
                     <div className="flex items-center gap-8">
                         <Link to="/" className="flex items-center gap-2">
                             <div className="bg-white p-2 rounded-full shadow-md">
@@ -32,11 +32,7 @@ function MainNav() {
                             </div>
                             <span className="text-white text-2xl font-bold">MyAppKpi</span>
                         </Link>
-
-                     
                     </div>
-
-                  
                     {user ? (
                         <div className="flex items-center gap-4 relative">
                             <span className="hidden lg:block text-white text-sm">Welcome, {user.username}</span>

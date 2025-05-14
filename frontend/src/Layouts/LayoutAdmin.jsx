@@ -10,9 +10,9 @@ const LayoutAdmin = () => {
         <HeaderAdmin />
         <hr />
         <main className='flex-1 p-6 bg-gray-100 overflow-y-auto'>
-        <Outlet />
+          <Outlet />
         </main>
-      
+
       </div>
     </div>
   )

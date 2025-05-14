@@ -16,14 +16,12 @@ const LoadingToRedirect = () => {
             })
 
         }, 1000)
-
         return () => clearInterval(interval)
     }, [])
 
     if (redirect) {
         return <Navigate to={'/'} />
     }
-
     return (
         <div>No Permission, Redirect in {count}</div>
     )

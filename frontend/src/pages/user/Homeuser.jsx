@@ -2,18 +2,12 @@ import React from 'react'
 import UpdeteKpi from '../../components/user/UpdeteKpi'
 import { useParams } from 'react-router-dom';
 
-
 const Homeuser = () => {
- const { id } = useParams();
-  
+  const { id } = useParams();
   return (
-
-    
     <div>
-            <UpdeteKpi/>
-            {id}
-       
-            
+      <UpdeteKpi />
+      {id}
     </div>
   )
 }

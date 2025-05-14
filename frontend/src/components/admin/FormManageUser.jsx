@@ -5,14 +5,12 @@ import useKpiStore from "../../store/kpi-store"
 import { Link } from "react-router-dom"
 import { SquarePen, Trash2 } from "lucide-react"
 
-
 const initialForm = {
     username: '',
     email: '',
     password: '',
     role_id: ''
 }
-
 
 const FormManageUser = () => {
     const token = useKpiStore((state) => state.token)
@@ -86,7 +84,6 @@ const FormManageUser = () => {
                         required
                     />
                 </div>
-
                 <div className="mb-4">
                     <label className="block text-sm font-semibold mb-2">Email</label>
                     <input
@@ -98,7 +95,6 @@ const FormManageUser = () => {
                         required
                     />
                 </div>
-
                 <div className="mb-6">
                     <label className="block text-sm font-semibold mb-2">Password</label>
                     <input
@@ -110,7 +106,6 @@ const FormManageUser = () => {
                         required
                     />
                 </div>
-
                 <div className="mb-6">
                     <label className="block text-sm font-semibold mb-2">ประเภทผู้ใช้งาน</label>
                     <select
@@ -158,7 +153,6 @@ const FormManageUser = () => {
                         ))}
                     </tbody>
                 </table>
-
                 <div className="flex gap-2 items-center mt-4">
                     <button
                         onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
