@@ -67,7 +67,7 @@ const FormEditManageUser = () => {
 
     return (
         <div className="container mx-auto p-4 bg-white shadow-md">
-            <h1>User Management</h1>
+            <h1 className="text-xl font-semibold mb-4">Edit user</h1>
             <form onSubmit={handleSubmit} className="my-4">
                 <div className="mb-4">
                     <label className="block text-sm font-semibold mb-2">Username</label>
@@ -123,7 +123,7 @@ const FormEditManageUser = () => {
                     type="submit"
                     className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
                 >
-                    Create
+                    Save Changes
                 </button>
                 <hr />
                 <br />
