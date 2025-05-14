@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import useKpiStore from "../../store/kpi-store";
-import { readKpiApi, updateKpiApi } from "../../api/KpiApi";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react"
+import { toast } from "react-toastify"
+import useKpiStore from "../../store/kpi-store"
+import { readKpiApi, updateKpiApi } from "../../api/KpiApi"
+import { useParams, useNavigate } from "react-router-dom"
 
 const FormEditKpi = () => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const token = useKpiStore((state) => state.token);
-    const listuser = useKpiStore((state) => state.listuser);
-    const getKpi = useKpiStore((state) => state.getKpi);
+    const { id } = useParams()
+    const navigate = useNavigate()
+    const token = useKpiStore((state) => state.token)
+    const listuser = useKpiStore((state) => state.listuser)
+    const getKpi = useKpiStore((state) => state.getKpi)
 
     const initialForm = {
         title: '',
@@ -20,68 +20,68 @@ const FormEditKpi = () => {
         assigned_user: '',
         start_date: '',
         end_date: ''
-    };
+    }
 
-    const [form, setForm] = useState(initialForm);
-    const [loading, setLoading] = useState(false);
+    const [form, setForm] = useState(initialForm)
+    const [loading, setLoading] = useState(false)
 
     const resetForm = () => {
-        setForm(initialForm);
-    };
+        setForm(initialForm)
+    }
 
     useEffect(() => {
         if (token) {
-            getKpi(token);  // Fetch the list of KPIs if needed
-            fetchUser(token, id); // Fetch the specific KPI data for editing
+            getKpi(token)  
+            fetchUser(token, id) 
         }
-    }, [token, getKpi, id]);
+    }, [token, getKpi, id])
 
     const fetchUser = async (token, id) => {
         try {
-            const res = await readKpiApi(token, id);
-            setForm(res.data);  // Assuming `res.data` is in the correct format
+            const res = await readKpiApi(token, id)
+            setForm(res.data) 
         } catch (error) {
-            console.error("Error fetching KPI:", error);
-            toast.error("เกิดข้อผิดพลาดในการดึงข้อมูล KPI");
+            console.error("Error fetching KPI:", error)
+            toast.error("เกิดข้อผิดพลาดในการดึงข้อมูล KPI")
         }
-    };
+    }
 
     const handleChange = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value,
-        });
-    };
+        })
+    }
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault()
 
         const cleanForm = {
             ...form,
             target_value: form.target_value ? parseFloat(form.target_value) : null,
             actual_value: form.actual_value ? parseFloat(form.actual_value) : null,
             assigned_user: parseInt(form.assigned_user, 10)
-        };
+        }
 
 
         if (!form.title || !form.assigned_user || !form.status) {
-            toast.error('กรุณากรอกข้อมูลให้ครบถ้วน');
-            return;
+            toast.error('กรุณากรอกข้อมูลให้ครบถ้วน')
+            return
         }
 
-        setLoading(true);
+        setLoading(true)
         try {
-            await updateKpiApi(token, id, cleanForm);
-            toast.success('KPI ได้รับการแก้ไขสำเร็จ!');
-            resetForm();  // Reset the form after successful update
-            navigate('/admin/kpi/');
+            await updateKpiApi(token, id, cleanForm)
+            toast.success('KPI ได้รับการแก้ไขสำเร็จ!')
+            resetForm()  // Reset the form after successful update
+            navigate('/admin/kpi/')
         } catch (error) {
-            const errMsg = error.response?.data?.message || 'เกิดข้อผิดพลาด';
-            toast.error(errMsg);
+            const errMsg = error.response?.data?.message || 'เกิดข้อผิดพลาด'
+            toast.error(errMsg)
         } finally {
-            setLoading(false);
+            setLoading(false)
         }
-    };
+    }
 
     return (
         <div className="container mx-auto p-4 bg-white shadow-md">
@@ -201,7 +201,7 @@ const FormEditKpi = () => {
                 </button>
             </form>
         </div>
-    );
+    )
 };
 
 export default FormEditKpi;
