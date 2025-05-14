@@ -29,8 +29,8 @@
 #### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/frontend.git
-cd frontend
+git clone https://github.com/Pisutpa/kpi_management_system.git
+cd kpi_management_system
 ```
 
 #### 2️⃣ Install dependencies
@@ -77,8 +77,8 @@ API ฝั่งเซิร์ฟเวอร์ (Backend) ที่พัฒ�
 #### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/your-username/backend.git
-cd backend
+git clone https://github.com/Pisutpa/kpi_management_system.git
+cd kpi_management_system
 ```
 
 #### 2️⃣ Install dependencies
